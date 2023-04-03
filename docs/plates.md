@@ -62,6 +62,8 @@ plate_dict["A01"]
 
 ## Plate arrays
 
+If we want to convert a Dataframe of a plate into a 2D array:
+
 ```python
 plate_arr = np.empty((16, 24), dtype=float)
 plate_arr[:] = np.nan  # set all values to missing
