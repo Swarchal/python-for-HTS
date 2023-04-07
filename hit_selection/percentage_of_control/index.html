@@ -9,15 +9,13 @@
       
       
       
-        <link rel="prev" href="../../Hit%20Selection/z_score/">
-      
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.5">
     
     
       
-        <title>Z prime - Python for HTS</title>
+        <title>Percentage of control - Python for HTS</title>
       
     
     
@@ -64,11 +62,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#z-prime" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -100,7 +93,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Z prime
+              Percentage of control
             
           </span>
         </div>
@@ -201,8 +194,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../plates/" class="md-nav__link">
-        Plates
+      <a href="../../wells/" class="md-nav__link">
+        Wells
       </a>
     </li>
   
@@ -216,8 +209,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wells/" class="md-nav__link">
-        Wells
+      <a href="../../plates/" class="md-nav__link">
+        Plates
       </a>
     </li>
   
@@ -241,14 +234,14 @@
       
       
         <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
-          Hit Selection
+          Quality control
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
-          Hit Selection
+          Quality control
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -258,136 +251,9 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Hit%20Selection/perc_of_control/" class="md-nav__link">
-        Perc of control
+      <a href="../../quality_control/z_prime/" class="md-nav__link">
+        Z-prime
       </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../Hit%20Selection/ssmd/" class="md-nav__link">
-        Ssmd
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../Hit%20Selection/z_score/" class="md-nav__link">
-        Z score
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-    
-  
-  
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-      
-      
-      
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
-      
-      
-      
-        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
-          Quality Control
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
-        <label class="md-nav__title" for="__nav_5">
-          <span class="md-nav__icon md-icon"></span>
-          Quality Control
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-    
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Z prime
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        Z prime
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#standard-z" class="md-nav__link">
-    Standard Z`
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#robust-z" class="md-nav__link">
-    Robust Z`
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -416,30 +282,6 @@
   
   
   
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#standard-z" class="md-nav__link">
-    Standard Z`
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#robust-z" class="md-nav__link">
-    Robust Z`
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -454,35 +296,9 @@
                   
 
 
-<h1 id="z-prime">Z prime</h1>
-<h2 id="standard-z">Standard Z`</h2>
-<p><a href="https://en.wikipedia.org/wiki/Z-factor">Z prime</a> is used as a quality control
-metric to measure the separation between positive and negative controls.</p>
-<div class="arithmatex">\[
-{\displaystyle {\text{Z`}}=1-{3(\sigma _{p}+\sigma _{n}) \over |\mu _{p}-\mu _{n}|}}
-\]</div>
-<p>Where <span class="arithmatex">\(\mu_p\)</span> and <span class="arithmatex">\(\mu_n\)</span> are the mean of the positive and negative controls, and
-<span class="arithmatex">\(\sigma_p\)</span> and <span class="arithmatex">\(\sigma_n\)</span> are the standard deviations of the positive and negative
-controls. A value greater than 0.5 is typically considered good.</p>
-<p>To calculate the Z` between a list of positive control values and negative control values:
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">def</span> <span class="nf">z_prime</span><span class="p">(</span><span class="n">pos</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">neg</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">sigma_p</span><span class="p">,</span> <span class="n">sigma_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">neg</span><span class="p">)</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">mu_p</span><span class="p">,</span> <span class="n">mu_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">neg</span><span class="p">)</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="n">sigma_p</span> <span class="o">+</span> <span class="n">sigma_n</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">mu_p</span> <span class="o">-</span> <span class="n">mu_n</span><span class="p">))</span>
-</span></code></pre></div></p>
-<h2 id="robust-z">Robust Z`</h2>
-<p>The robust Z prime is the same calculation as before, but using the median
-instead of mean, and median absolute deviation instead of standard deviation.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">median_abs_deviation</span> <span class="k">as</span> <span class="n">mad</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="k">def</span> <span class="nf">robust_z_prime</span><span class="p">(</span><span class="n">pos</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">neg</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">sigma_p</span><span class="p">,</span> <span class="n">sigma_n</span> <span class="o">=</span> <span class="n">mad</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="n">mad</span><span class="p">(</span><span class="n">neg</span><span class="p">)</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">mu_p</span><span class="p">,</span> <span class="n">mu_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">neg</span><span class="p">)</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="n">sigma_p</span> <span class="o">+</span> <span class="n">sigma_n</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">mu_p</span> <span class="o">-</span> <span class="n">mu_n</span><span class="p">))</span>
-</span></code></pre></div>
+  <h1>Percentage of control</h1>
+
+
 
 
 
