@@ -1,12 +1,9 @@
 
 # Introduction
 
-Python for high throughput screening (HTS).
-
-How to perform common HTS tasks in python.
-
-A work in progress.
-
+This is meant to be a repository of common high-throughput screening (HTS)
+tasks using the python programming language. It's probably somewhere in-between
+an introductory tutorial and a cookbook.
 
 ## Prerequisites 
 This is going to assume some basic familiarity with python, such as what a
@@ -23,6 +20,11 @@ and terminology, such as multi-well plates, IC50 values, z-scores etc.
 The code in these tutorials uses python 3.10 and python's [type-hints](https://docs.python.org/3/library/typing.html).
 This is optional, and the code will run the same without it. I prefer it for clarity
 and better IDE experience.
+
+The code snippets are written with an aim of clarity rather than numerical stability
+or handling edge-cases. Dealing with missing data or dividing by zero issues is
+a separate topic.
+
 
 ### Libraries
 
