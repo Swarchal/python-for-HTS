@@ -165,3 +165,25 @@ def well_to_row_col(well: str) -> tuple[int, int]:
 
 We could also solve this issue using [regular expressions](https://docs.python.org/3/library/re.html)
 but they're usually more trouble than they're worth.
+
+### Sorting 1536 well labels
+
+With 96 and 384 well plates we can sort well-labels alphabetically, however with
+1536 well plates this does not work as expected. One way around this is to
+extract the row and column indices from the well label first, then sort by row and column.
+
+```python
+# construct example data
+wells = ["A01", "AA01", "AF01", "Z01"]
+vals = [1, 2, 3, 4]
+df = pd.DataFrame({"well": wells, "data": vals})
+
+# generate row and column labels
+rows, cols = zip(*[well_to_row_col(i) for i in df["well"]])
+df["row"] = rows
+df["col"] = cols
+
+# sort data by row and column
+df_sorted = df.sort_values(["row", "col"])
+# maybe drop "row" and "col" columns
+```
