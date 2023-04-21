@@ -9,6 +9,9 @@ nav:
   - Plates: "plates.md"
   - 'Quality control':
     - Z-prime: "quality_control/z_prime.md"
+  - Conc. response curves:
+    - Fitting curves to data: "conc_response_curves/fitting.md"
+    - Plotting: "conc_response_curves/plotting.md"
   # - 'Hit selection':
   #   - Z-score: "hit_selection/z_score.md"
   #   - B-score: "hit_selection/b_score.md"
