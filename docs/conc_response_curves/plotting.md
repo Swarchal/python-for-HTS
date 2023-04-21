@@ -50,13 +50,16 @@ Now we can plot both the raw data points and the fitted curve in matplotlib.
 
 ```python
 plt.plot(x_interpolated, y_interpolated, label="fitted curve", color="black")
-plt.plot(conc, response, "+", label="raw data", color="black")
+plt.scatter(
+    conc, response, label="raw data", color="black", facecolor="white", zorder=99
+)
 plt.vlines(
-  x=ec50, ymin=0, ymax=max(response)/2, linestyle="dotted", color="gray"
+    x=ec50, ymin=0, ymax=max(response)/2, linestyle="dotted", color="gray"
 )
 plt.hlines(
-  y=max(response)/2, xmin=min(conc), xmax=ec50, linestyle="dotted", color="gray"
+    y=max(response)/2, xmin=min(conc), xmax=ec50, linestyle="dotted", color="gray"
 )
+plt.text(x=1e-9, y=23, s=f"$EC_{{50}} = {ec50:.2E}$")
 plt.xlabel("Concentration")
 plt.ylabel("Response")
 plt.xscale("log")
