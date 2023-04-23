@@ -28,7 +28,8 @@ df_a = df[df["drug"] == "A"]
 conc = df_a["conc"].to_numpy()
 response = df_a["response"].to_numpy()
 
-(top, bottom, ec50), pcov = curve_fit(hill_3_param, x=con, y=response)
+popt, pcov = curve_fit(hill_3_param, x=con, y=response)
+top, bottom, ec50 = popt
 ```
 
 We now have our parameters of our 3 parameter model (top, bottom, ec50):
@@ -42,7 +43,7 @@ values to plot a smoother curve.
 
 ```
 x_interpolated = np.logspace(min(np.log10(conc)), max(np.log(conc)), 100)
-y_interpolated = [hill_3_param(i, *popt) for i in x_interpolated]
+y_interpolated = [hill_3_param(x, *popt) for x in x_interpolated]
 ```
 
 
@@ -53,12 +54,8 @@ plt.plot(x_interpolated, y_interpolated, label="fitted curve", color="black")
 plt.scatter(
     conc, response, label="raw data", color="black", facecolor="white", zorder=99
 )
-plt.vlines(
-    x=ec50, ymin=0, ymax=max(response)/2, linestyle="dotted", color="gray"
-)
-plt.hlines(
-    y=max(response)/2, xmin=min(conc), xmax=ec50, linestyle="dotted", color="gray"
-)
+plt.vlines(x=ec50, ymin=0, ymax=top/2, linestyle="dotted", color="gray")
+plt.hlines(y=top/2, xmin=min(conc), xmax=ec50, linestyle="dotted", color="gray")
 plt.text(x=1e-9, y=23, s=f"$EC_{{50}} = {ec50:.2E}$")
 plt.xlabel("Concentration")
 plt.ylabel("Response")
