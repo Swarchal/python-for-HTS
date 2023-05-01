@@ -6,6 +6,7 @@ we can define the curve fitting function in numpy, and use [`scipy.optimize.curv
 
 ## 3 parameter curve
 
+### Concentration
 
 ```python
 import numpy as np
@@ -16,15 +17,36 @@ def hill_3_param(
     return bottom + x * (top - bottom) / (ec50 + x)
 ```
 
+### log concentrations
+
+```python
+def hill_3_param(
+    x: np.ndarray, top: float, botton: float, log_ec50: float
+) -> np.ndarray:
+    return bottom + (top - bottom)  / (1 + 10**(log_ec50-x))
+```
+
 
 ## 4 parameter curve
+
+### Concentration
+
 ```python
 import numpy as np
 
 def hill_4_param(
     x: nd.array, top: float, bottom: float, ec50: float, hillslope: float
 ) -> np.ndarray:
-    return (top - bottom) / (1 + (x / ec50) ** hillslope)
+    return bottom + (x**hillslope) * (top - bottom) / ((x**hillslope) + (ec50**hillslope))
+```
+
+### log concentrations
+
+```python
+def hill_4_param(
+    x: nd.array, top: float, bottom: float, log_ec50: float, hillslope: float
+) -> np.ndarray:
+    return bottom + (top - bottom) / (1 + 10**((log_ec50 - x) * hillslope))
 ```
 
 
