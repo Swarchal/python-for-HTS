@@ -23,7 +23,7 @@ def hill_3_param(
 def hill_3_param(
     x: np.ndarray, top: float, botton: float, log_ec50: float
 ) -> np.ndarray:
-    return bottom + (top - bottom)  / (1 + 10**(log_ec50-x))
+    return bottom + (top - bottom)  / (1 + 10**(log_ec50 - x))
 ```
 
 
@@ -35,16 +35,18 @@ def hill_3_param(
 import numpy as np
 
 def hill_4_param(
-    x: nd.array, top: float, bottom: float, ec50: float, hillslope: float
+    x: np.ndarray, top: float, bottom: float, ec50: float, hillslope: float
 ) -> np.ndarray:
-    return bottom + (x**hillslope) * (top - bottom) / ((x**hillslope) + (ec50**hillslope))
+    numerator = bottom + (x**hillslope) * (top - bottom)
+    denominator = ((x**hillslope) + (ec50**hillslope))
+    return numerator / denominator
 ```
 
 ### log concentrations
 
 ```python
 def hill_4_param(
-    x: nd.array, top: float, bottom: float, log_ec50: float, hillslope: float
+    x: np.ndarray, top: float, bottom: float, log_ec50: float, hillslope: float
 ) -> np.ndarray:
     return bottom + (top - bottom) / (1 + 10**((log_ec50 - x) * hillslope))
 ```
