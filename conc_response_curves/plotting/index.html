@@ -521,7 +521,7 @@ value for any given concentration.</p>
 <p>Now we generate 100 interpolated values between our minimum and maximum concentration
 values to plot a smoother curve.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>x_interpolated = np.logspace(min(np.log10(conc)), max(np.log(conc)), 100)
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>y_interpolated = [hill_3_param(x, *popt) for x in x_interpolated]
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>y_interpolated = hill_3_param(x_interpolated, *popt)
 </span></code></pre></div>
 <p>Now we can plot both the raw data points and the fitted curve in matplotlib.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_interpolated</span><span class="p">,</span> <span class="n">y_interpolated</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;fitted curve&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
