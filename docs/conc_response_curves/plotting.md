@@ -43,7 +43,7 @@ values to plot a smoother curve.
 
 ```
 x_interpolated = np.logspace(min(np.log10(conc)), max(np.log(conc)), 100)
-y_interpolated = [hill_3_param(x, *popt) for x in x_interpolated]
+y_interpolated = hill_3_param(x_interpolated, *popt)
 ```
 
 
