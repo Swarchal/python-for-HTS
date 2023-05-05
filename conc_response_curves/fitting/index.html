@@ -445,6 +445,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#pcov-and-parameter-uncertainty" class="md-nav__link">
+    pcov and parameter uncertainty
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -643,6 +650,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#pcov-and-parameter-uncertainty" class="md-nav__link">
+    pcov and parameter uncertainty
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -741,6 +755,27 @@ but allow <code>ec50</code> to be fit to any value.
 </span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">)</span>
 </span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">curve_fit</span><span class="p">(</span><span class="n">hill_3_param</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">)</span>
 </span></code></pre></div></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you set <code>bounds</code>, you should be aware of the default values of
+<code>p0</code> being initialised as 1. If your bounds do not cover 1 then your model will
+fail to fit. So it's probably wise to set values for <code>p0</code> if you're also
+setting <code>bounds</code>.</p>
+</div>
+<h3 id="pcov-and-parameter-uncertainty"><code>pcov</code> and parameter uncertainty</h3>
+<p>The <code>pcov</code> object returned on <code>scipy.optimize.curve_fit()</code> is an n by n matrix
+of estimated parameter covariances, where n is the number of parameters in your
+model. We can use the diagonal of this matrix to get the estimated standard
+deviation of our parameters.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">curve_fit</span><span class="p">(</span><span class="n">hill_3_param</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">p_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">pcov</span><span class="p">))</span>
+</span></code></pre></div>
+<p>Since our <code>hill_3_param</code> model has 3 parameters, <code>p_err</code> will now the variance
+of those 3 parameters in the same order as their arguments in the original
+function (top, bottom, ec50).</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;EC50 = </span><span class="si">{</span><span class="n">popt</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">p_err</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2"> std. dev.)&quot;</span><span class="p">)</span>
+</span></code></pre></div>
 
 
   
