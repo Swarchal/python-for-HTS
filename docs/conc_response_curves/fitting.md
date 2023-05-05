@@ -115,3 +115,32 @@ bounds = (
 )
 popt, pcov = scipy.optimize.curve_fit(hill_3_param, x, y, bounds=bounds)
 ```
+
+!!! note
+
+    If you set `bounds`, you should be aware of the default values of
+    `p0` being initialised as 1. If your bounds do not cover 1 then your model will
+    fail to fit. So it's probably wise to set values for `p0` if you're also
+    setting `bounds`.
+
+
+### `pcov` and parameter uncertainty
+
+The `pcov` object returned on `scipy.optimize.curve_fit()` is an n by n matrix
+of estimated parameter covariances, where n is the number of parameters in your
+model. We can use the diagonal of this matrix to get the estimated standard
+deviation of our parameters.
+
+```python
+popt, pcov = scipy.optimize.curve_fit(hill_3_param, x, y)
+
+p_err = np.sqrt(np.diag(pcov))
+```
+
+Since our `hill_3_param` model has 3 parameters, `p_err` will now the variance
+of those 3 parameters in the same order as their arguments in the original
+function (top, bottom, ec50).
+
+```python
+print(f"EC50 = {popt[2]} ({p_err[2]} std. dev.)")
+```
