@@ -445,15 +445,15 @@
   
 </li>
         
-          <li class="md-nav__item">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#pcov-and-parameter-uncertainty" class="md-nav__link">
     pcov and parameter uncertainty
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -650,15 +650,15 @@
   
 </li>
         
-          <li class="md-nav__item">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#pcov-and-parameter-uncertainty" class="md-nav__link">
     pcov and parameter uncertainty
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -762,7 +762,7 @@ but allow <code>ec50</code> to be fit to any value.
 fail to fit. So it's probably wise to set values for <code>p0</code> if you're also
 setting <code>bounds</code>.</p>
 </div>
-<h3 id="pcov-and-parameter-uncertainty"><code>pcov</code> and parameter uncertainty</h3>
+<h2 id="pcov-and-parameter-uncertainty"><code>pcov</code> and parameter uncertainty</h2>
 <p>The <code>pcov</code> object returned on <code>scipy.optimize.curve_fit()</code> is an n by n matrix
 of estimated parameter covariances, where n is the number of parameters in your
 model. We can use the diagonal of this matrix to get the estimated standard
