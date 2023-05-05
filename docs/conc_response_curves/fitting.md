@@ -124,7 +124,7 @@ popt, pcov = scipy.optimize.curve_fit(hill_3_param, x, y, bounds=bounds)
     setting `bounds`.
 
 
-### `pcov` and parameter uncertainty
+## `pcov` and parameter uncertainty
 
 The `pcov` object returned on `scipy.optimize.curve_fit()` is an n by n matrix
 of estimated parameter covariances, where n is the number of parameters in your
