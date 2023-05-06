@@ -111,4 +111,63 @@ plt.xscale("log")
 plt.legend()
 ```
 
-![conc response with undertainty bands](../img/conc_response_3_param_sd_bands.png)
+![conc response with uncertainty bands](../img/conc_response_3_param_sd_bands.png)
+
+## Plotting multiple curves
+
+If we're plotting multiple curves it's worth writing some functions so we
+don't have to repeat lots of curves for each drug.
+
+Since our data is in the form of a dataframe, we can split by the `drug` column
+and loop through the different drugs, calculating the curve fitting parameters and plot
+each one in turn
+
+```python
+from typing import NamedTuple
+
+class Params(NamedTuple):
+    top: float
+    bottom: float
+    ec50: float
+
+
+class ModelFit(NamedTuple):
+    x_raw: np.ndarray
+    y_raw: np.ndarray
+    x_interp: np.ndarray
+    y_fit: np.ndarray
+    params: Params
+
+
+def fit_3_param_curve(df: pd.DataFrame) -> ModelFit:
+    x = df["conc"].to_numpy()
+    y = df["response"].to_numpy()
+    popt, pcov = curve_fit(hill3param, x, y)
+    x_interp = np.logspace(min(np.log10(x)), max(np.log10(x)), 100)
+    y_fit = hill3param(x_interp, *popt)
+    return ModelFit(x, y, x_interp, y_fit, Params(*popt))
+
+
+def plot_3_param_curve(model_fit: ModelFit):
+    params = model_fit.params
+    plt.plot(model_fit.x_interp, model_fit.y_fit, label=name)
+    plt.scatter(model_fit.x_raw, model_fit.y_raw, s=50, zorder=999)
+    plt.vlines(
+        x=params.ec50, ymin=0, ymax=params.top/2, linestyle="dotted", color="gray"
+    )
+    plt.hlines(
+        y=params.top/2, xmin=min(x), xmax=params.ec50, linestyle="dotted", color="gray"
+    )
+    
+
+plt.figure(figsize=[10, 6])
+for name, group in df.groupby("drug"):
+    model_fit = fit_3_param_curve(group)
+    plot_3_param_curve(model_fit)
+plt.xlabel("Concentration")
+plt.ylabel("Response")
+plt.xscale("log")
+plt.legend(title="Drug", loc="upper left")
+```
+
+![multiple conc response curves](../img/conc_response_3_param_multiple.png)
