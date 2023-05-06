@@ -377,6 +377,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#plotting-with-matplotlib" class="md-nav__link">
+    Plotting with matplotlib
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plotting-standard-deviations-with-pcov" class="md-nav__link">
+    Plotting standard deviations with pcov
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -474,6 +488,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#plotting-with-matplotlib" class="md-nav__link">
+    Plotting with matplotlib
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plotting-standard-deviations-with-pcov" class="md-nav__link">
+    Plotting standard deviations with pcov
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -523,6 +551,7 @@ values to plot a smoother curve.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>x_interpolated = np.logspace(min(np.log10(conc)), max(np.log(conc)), 100)
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>y_interpolated = hill_3_param(x_interpolated, *popt)
 </span></code></pre></div>
+<h2 id="plotting-with-matplotlib">Plotting with matplotlib</h2>
 <p>Now we can plot both the raw data points and the fitted curve in matplotlib.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_interpolated</span><span class="p">,</span> <span class="n">y_interpolated</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;fitted curve&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
@@ -537,6 +566,42 @@ values to plot a smoother curve.</p>
 </span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 </span></code></pre></div>
 <p><img alt="conc response curve" src="../../img/conc_response_3_param_single.png" /></p>
+<h2 id="plotting-standard-deviations-with-pcov">Plotting standard deviations with <code>pcov</code></h2>
+<p>As mentioned in the curve fitting section we can get the standard deviations of
+our curve parameters from the <code>pcov</code> matrix.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">p_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">pcov</span><span class="p">))</span>
+</span></code></pre></div>
+<p>We can then plot this uncertainty on the curve by calculating 2 additional curves,
+one with our parameters + standard deviation, and another - standard deviation.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">y_hat_upper</span> <span class="o">=</span> <span class="n">hill_3_param</span><span class="p">(</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">x_interpolated</span><span class="p">,</span> <span class="n">top</span><span class="o">+</span><span class="n">p_err</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bottom</span><span class="o">+</span><span class="n">p_err</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ec50</span><span class="o">+</span><span class="n">p_err</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="p">)</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">y_hat_lower</span> <span class="o">=</span> <span class="n">hill_3_param</span><span class="p">(</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="n">x_interpolated</span><span class="p">,</span> <span class="n">top</span><span class="o">-</span><span class="n">p_err</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bottom</span><span class="o">-</span><span class="n">p_err</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ec50</span><span class="o">-</span><span class="n">p_err</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="p">)</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_interpolated</span><span class="p">,</span> <span class="n">y_hat</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;fitted curve&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;raw data&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">999</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="p">)</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>    <span class="n">x_interpolated</span><span class="p">,</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>    <span class="n">y1</span><span class="o">=</span><span class="n">y_hat_upper</span><span class="p">,</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>    <span class="n">y2</span><span class="o">=</span><span class="n">y_hat_lower</span><span class="p">,</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\pm$ 1SD&quot;</span>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="p">)</span>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">ec50</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">top</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">top</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">xmin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">xmax</span><span class="o">=</span><span class="n">ec50</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$EC_</span><span class="se">{{</span><span class="s2">50</span><span class="se">}}</span><span class="s2">$ = </span><span class="si">{</span><span class="n">ec50</span><span class="si">:</span><span class="s2">.2E</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Concentration&quot;</span><span class="p">)</span>
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Response&quot;</span><span class="p">)</span>
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</span></code></pre></div>
+<p><img alt="conc response with undertainty bands" src="../../img/conc_response_3_param_sd_bands.png" /></p>
 
 
   
