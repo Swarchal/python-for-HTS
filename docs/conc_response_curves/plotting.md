@@ -79,6 +79,8 @@ p_err = np.sqrt(np.diag(pcov))
 
 We can then plot this uncertainty on the curve by calculating 2 additional curves,
 one with our parameters + standard deviation, and another - standard deviation.
+Then we can use `plt.fill_between()` to fill the area between the upper and lower
+bounded curves.
 
 ```python
 y_hat_upper = hill_3_param(
@@ -88,10 +90,9 @@ y_hat_lower = hill_3_param(
     x_interpolated, top-p_err[0], bottom-p_err[1], ec50-p_err[2]
 )
 
-plt.figure(figsize=[10, 6])
-plt.plot(x_interpolated, y_hat, label="fitted curve", color="black")
+plt.plot(x_interpolated, y_interpolated, label="fitted curve", color="black")
 plt.scatter(
-    x, y, s=50,label="raw data", color="black", facecolor="white", zorder=999
+    conc, response, label="raw data", color="black", facecolor="white", zorder=99
 )
 plt.fill_between(
     x_interpolated,
@@ -102,8 +103,8 @@ plt.fill_between(
     label="$\pm$ 1SD"
 )
 plt.vlines(x=ec50, ymin=0, ymax=top/2, linestyle="dotted", color="gray")
-plt.hlines(y=top/2, xmin=min(x), xmax=ec50, linestyle="dotted", color="gray")
-plt.text(x=1e-9, y=21, s=f"$EC_{{50}}$ = {ec50:.2E}")
+plt.hlines(y=top/2, xmin=min(conc), xmax=ec50, linestyle="dotted", color="gray")
+plt.text(x=1e-9, y=23, s=f"$EC_{{50}} = {ec50:.2E}$")
 plt.xlabel("Concentration")
 plt.ylabel("Response")
 plt.xscale("log")
