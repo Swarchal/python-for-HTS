@@ -9,13 +9,15 @@
       
       
       
+        <link rel="prev" href="../z_score/">
+      
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.5">
     
     
       
-        <title>Strictly Standardised Mean Difference (SSMD) - Python for HTS</title>
+        <title>SSMD - Python for HTS</title>
       
     
     
@@ -110,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Strictly Standardised Mean Difference (SSMD)
+              SSMD
             
           </span>
         </div>
@@ -303,14 +305,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
       
       
       
@@ -319,7 +323,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           Hit selection
@@ -335,6 +339,30 @@
       <a href="../z_score/" class="md-nav__link">
         Z-score
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        SSMD
+      </a>
+      
     </li>
   
 
@@ -385,6 +413,70 @@ Z-prime, as well as hit-selection. It was initially prosed by <a href="https://w
 <div class="arithmatex">\[
 \beta = \frac{\mu_1 - \mu_2}{\sqrt{\sigma_1^2 + \sigma_2^2 - 2\sigma_{12}}}
 \]</div>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">ssmd</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">mu_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">mu_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">sigma_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">sigma_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">cov_xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">mu_x</span> <span class="o">-</span> <span class="n">mu_y</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sigma_x</span> <span class="o">+</span> <span class="n">sigma_y</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">cov_xy</span><span class="p">)</span>
+</span></code></pre></div>
+<p>The <span class="arithmatex">\(\beta\)</span> value returned from SSMD can be compared against a table to
+get an idea of the effect size.</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(\beta\)</span></th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>no effect</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0 &lt; \beta \le 0.25\)</span></td>
+<td>extremely weak</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.25 &lt; \beta \le 0.5\)</span></td>
+<td>very week</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.5 &lt; \beta \le 0.75\)</span></td>
+<td>weak</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.75 &lt; \beta \le 1\)</span></td>
+<td>fairly weak</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(1 &lt; \beta \le 1.28\)</span></td>
+<td>fairly moderate</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(1.28 &lt; \beta \le 1.654\)</span></td>
+<td>moderate</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(1.654 &lt; \beta \le 2\)</span></td>
+<td>fairly strong</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(2 &lt; \beta \le 3\)</span></td>
+<td>strong</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(3 &lt; \beta \le 5\)</span></td>
+<td>very strong</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\beta &gt; 5\)</span></td>
+<td>extremely strong</td>
+</tr>
+</tbody>
+</table>
 
 
   
